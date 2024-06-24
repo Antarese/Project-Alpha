@@ -1,6 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://kkp2n1qgi50o"]
+[gd_scene load_steps=9 format=3 uid="uid://kkp2n1qgi50o"]
 
 [ext_resource type="PackedScene" uid="uid://31ov7jc1oq3y" path="res://Characters/Redman/redman.tscn" id="1_50fhe"]
+[ext_resource type="Script" path="res://Background/City 01/parallax_background.gd" id="1_a4e63"]
+[ext_resource type="Texture2D" uid="uid://bwnheoq6rfstj" path="res://Asset/Background/Far Background.png" id="2_mv82i"]
+[ext_resource type="Texture2D" uid="uid://cngj17lo4njts" path="res://Asset/Background/Middle Background.png" id="3_w0nva"]
+[ext_resource type="Texture2D" uid="uid://bviao22jv0va1" path="res://Asset/Background/Near Background.png" id="4_4plww"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvixt"]
 size = Vector2(1153, 307)
@@ -13,10 +17,39 @@ size = Vector2(63, 651)
 
 [node name="World" type="Node2D"]
 
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+script = ExtResource("1_a4e63")
+
+[node name="Far Background" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(1292, 0)
+
+[node name="Far Background" type="Sprite2D" parent="ParallaxBackground/Far Background"]
+position = Vector2(647.5, 324.75)
+scale = Vector2(2.52539, 2.52539)
+texture = ExtResource("2_mv82i")
+
+[node name="Middle Background" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.5, 0.5)
+motion_mirroring = Vector2(1292, 0)
+
+[node name="MiddleBackground" type="Sprite2D" parent="ParallaxBackground/Middle Background"]
+position = Vector2(647.25, 326)
+scale = Vector2(2.53027, 2.53027)
+texture = ExtResource("3_w0nva")
+
+[node name="Near Background" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.75, 0.75)
+motion_mirroring = Vector2(1292, 0)
+
+[node name="NearBackground" type="Sprite2D" parent="ParallaxBackground/Near Background"]
+position = Vector2(647.5, 325.75)
+scale = Vector2(2.5293, 2.5293)
+texture = ExtResource("4_4plww")
+
 [node name="World Boundary" type="StaticBody2D" parent="."]
 
 [node name="Floor Collision Shape" type="CollisionShape2D" parent="World Boundary"]
-position = Vector2(576.5, 494.5)
+position = Vector2(576.5, 769)
 shape = SubResource("RectangleShape2D_cvixt")
 
 [node name="Left Collision Shape" type="CollisionShape2D" parent="World Boundary"]
@@ -28,9 +61,9 @@ position = Vector2(1182.5, 328.5)
 shape = SubResource("RectangleShape2D_i4n4t")
 
 [node name="Panel" type="Panel" parent="."]
-offset_top = 341.0
+offset_top = 615.0
 offset_right = 1153.0
-offset_bottom = 653.0
+offset_bottom = 927.0
 
 [node name="Redman" parent="." instance=ExtResource("1_50fhe")]
 position = Vector2(42, 281)
